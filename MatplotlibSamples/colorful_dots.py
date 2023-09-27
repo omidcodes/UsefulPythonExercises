@@ -1,7 +1,6 @@
-import random
-
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 
 x_list = []
 y_list = []
