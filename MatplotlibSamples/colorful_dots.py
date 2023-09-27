@@ -1,25 +1,13 @@
+import random
+
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 
 x_list = []
 y_list = []
 
-color_choices = [
-    "red",
-    "green",
-    "blue",
-    "yellow",
-    "pink",
-    "black",
-    "orange",
-    "purple",
-    "beige",
-    "brown",
-    "gray",
-    "cyan",
-    "magenta",
-]
+color_choices = \
+    ["red", "green", "blue", "yellow", "pink", "black", "orange", "purple", "beige", "brown", "gray", "cyan", "magenta"]
 
 colors = []
 
