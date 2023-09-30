@@ -3,19 +3,13 @@ from typing import List
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-
         minimum_appearance_times: int = len(nums) // 2 + 1
 
-        appearance_time_dict: dict = {}
+        unique_numbers: list = list(set(nums))
 
-        for num in nums:
-            if num in appearance_time_dict.keys():
-                appearance_time_dict[num] += 1
-            else:
-                appearance_time_dict[num] = 1
-
-            if appearance_time_dict[num] >= minimum_appearance_times:
-                return num
+        for unique_number in unique_numbers:
+            if nums.count(unique_number) >= minimum_appearance_times:
+                return unique_number
 
 
 if __name__ == '__main__':
