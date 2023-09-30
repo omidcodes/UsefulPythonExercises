@@ -11,16 +11,11 @@ class Solution:
         for num in nums:
             if num in appearance_time_dict.keys():
                 appearance_time_dict[num] += 1
-                continue
-            appearance_time_dict[num] = 1
+            else:
+                appearance_time_dict[num] = 1
 
-        for number, appearance_times in appearance_time_dict.items():
-            if appearance_times >= minimum_appearance_times:
-                return number
-
-        # print(appearance_time_dict)
-
-        return 0
+            if appearance_time_dict[num] >= minimum_appearance_times:
+                return num
 
 
 if __name__ == '__main__':
