@@ -1,0 +1,6 @@
+numpy
+pandas
+cryptography
+sympy
+openpyxl
+Pyarrow
