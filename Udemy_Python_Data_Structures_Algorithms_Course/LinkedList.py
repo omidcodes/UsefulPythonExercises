@@ -67,6 +67,20 @@ class LinkedList:
         one_before_the_last_node = self.__find_one_before_the_last_node()
         one_before_the_last_node.next = None
         self.tail = one_before_the_last_node
+
+    def prepend(self, value):
+        """ Add to the beginning of the LinkedList"""
+
+        # TODO : Complete me .......
+
+        # new_node = Node(value)
+
+        # if self.length == 0:
+        #     self.head = new_node
+        #     self.tail = new_node
+        #     return
+        
+
  
 
 my_linked_list = LinkedList(4)
