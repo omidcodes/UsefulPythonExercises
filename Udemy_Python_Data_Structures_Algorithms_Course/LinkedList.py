@@ -75,8 +75,6 @@ class LinkedList:
     def prepend(self, value):
         """ Add to the beginning of the LinkedList"""
 
-        # TODO : Complete me .......
-
         new_node = Node(value)
 
         if self.length == 0:
@@ -103,7 +101,7 @@ class LinkedList:
         self.length -=1
 
     def __validate_index(self, index) -> None:
-        if self.length < 0 or index > self.length - 1 :
+        if index < 0 or index > self.length - 1 :
             raise IndexError("Index is out of range")
 
     def __get_node_by_index(self, index: int) -> Node:
@@ -155,6 +153,29 @@ class LinkedList:
 
         self.length +=1
 
+    def remove(self, index):
+        
+        self.__validate_index(index)
+        
+        if self.length == 0 :   # TODO : Check. It may not be necessary
+            raise IndexError("Invalid Index")
+        
+        if index == 0:
+            current_head : Node = self.head
+            self.head = self.head.next
+
+            del current_head
+
+        else:
+            before_node : Node = self.__get_node_by_index(index=index-1)
+            current_node: Node = before_node.next
+            after_node = current_node.next
+
+            before_node.next = after_node
+            del current_node
+
+        self.length -=1
+
  
 
 my_linked_list = LinkedList(4)
@@ -195,4 +216,9 @@ my_linked_list.print_values()
 
 print("`insert` The item ...")
 my_linked_list.insert(index=3, value=40)
+my_linked_list.print_values()
+
+
+print("`Removing` The item ...")
+my_linked_list.remove(index=3)
 my_linked_list.print_values()
