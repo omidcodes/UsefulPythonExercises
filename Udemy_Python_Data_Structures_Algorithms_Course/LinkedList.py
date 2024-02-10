@@ -128,6 +128,33 @@ class LinkedList:
         node : Node = self.__get_node_by_index(index=index)
 
         node.value = value
+
+    def insert(self, index, value):
+        
+        self.__validate_index(index=index)
+
+
+        if index == 0:
+            self.prepend(value)
+            return
+
+        if index == self.length:
+            self.append(value)
+            return
+
+        
+        node_before : Node = self.__get_node_by_index(index=index-1)
+        node_current : Node = node_before.next
+
+
+        new_node = Node(value)
+
+        node_before.next = new_node
+
+        new_node.next = node_current
+
+        self.length +=1
+
  
 
 my_linked_list = LinkedList(4)
@@ -164,4 +191,8 @@ print(my_linked_list.get(2))
 
 print("`set_value` The item ...")
 my_linked_list.set_value(index=0, value=99)
+my_linked_list.print_values()
+
+print("`insert` The item ...")
+my_linked_list.insert(index=3, value=40)
 my_linked_list.print_values()
