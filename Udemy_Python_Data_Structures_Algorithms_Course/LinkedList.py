@@ -161,10 +161,7 @@ class LinkedList:
             raise IndexError("Invalid Index")
         
         if index == 0:
-            current_head : Node = self.head
-            self.head = self.head.next
-
-            del current_head
+            self.pop_first()
 
         else:
             before_node : Node = self.__get_node_by_index(index=index-1)
