@@ -23,6 +23,7 @@ class Solution:
         merged_output = sorted(nums1_cut + nums2_cut)
 
         from copy import deepcopy
+
         # nums1[:] = merged_output
         nums1[:] = merged_output
 

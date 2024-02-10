@@ -1,4 +1,6 @@
 import os
+
+
 def split_file(filename):
     with open(filename, 'r') as input_file :
         lines = [line.rstrip('\n') for line in input_file]

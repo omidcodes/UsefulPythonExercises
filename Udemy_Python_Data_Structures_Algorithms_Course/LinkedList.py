@@ -103,10 +103,6 @@ class LinkedList:
         self.length -=1
 
     def __validate_index(self, index) -> None:
-        # print("ddddd")
-        # print(self.length)
-        # print(index)
-        # print("ddddd")
         if self.length < 0 or index > self.length - 1 :
             raise IndexError("Index is out of range")
 

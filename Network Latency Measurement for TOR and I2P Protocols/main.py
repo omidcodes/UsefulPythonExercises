@@ -1,9 +1,9 @@
 from array import array
 
+from delay_calculation import ExcelWriter, SimulationModel
 from Others.elgamal_new.constants import (MAX_ITERATION_NUMBER,
                                           MAX_ROUND_NUMBER, MAX_SEED_LATENCY,
                                           SIMULATION_PROTOCOL)
-from delay_calculation import ExcelWriter, SimulationModel
 
 
 def run_simulation():
