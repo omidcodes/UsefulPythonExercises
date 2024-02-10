@@ -84,7 +84,19 @@ class LinkedList:
         
         self.length +=1
         
+    def pop_first(self):
+        
+        if self.length == 0:
+            raise Exception("There is no item to pop")
+        elif self.length == 1:
+            self.head.next = None
+            self.head = None
+        else:
+            second_element = self.head.next
+            self.head.next = None
+            self.head = second_element
 
+        self.length -=1
  
 
 my_linked_list = LinkedList(4)
@@ -107,4 +119,8 @@ my_linked_list.print_values()
 
 print("Prepending The item ...")
 my_linked_list.prepend(7)
+my_linked_list.print_values()
+
+print("Popping The First item ...")
+my_linked_list.pop_first()
 my_linked_list.print_values()
