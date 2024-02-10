@@ -13,6 +13,8 @@ class LinkedList:
         self.length = 1
 
     def print_values(self) -> None:
+
+        print(f"self.length = {self.length}")
         
         ptr = self.head
 
@@ -68,6 +70,8 @@ class LinkedList:
         one_before_the_last_node.next = None
         self.tail = one_before_the_last_node
 
+        self.length -= 1
+
     def prepend(self, value):
         """ Add to the beginning of the LinkedList"""
 
@@ -97,13 +101,47 @@ class LinkedList:
             self.head = second_element
 
         self.length -=1
+
+    def __validate_index(self, index) -> None:
+        # print("ddddd")
+        # print(self.length)
+        # print(index)
+        # print("ddddd")
+        if self.length < 0 or index > self.length - 1 :
+            raise IndexError("Index is out of range")
+
+    def __get_node_by_index(self, index: int) -> Node:
+        self.__validate_index(index=index)
+        
+        current_one = self.head
+
+        for _ in range(index):
+            current_one = current_one.next
+
+        return current_one
+
+    def get(self, index):
+        """ Indexes start from 0 """
+
+        node : Node = self.__get_node_by_index(index=index)
+
+        return node.value
+    
+    def set_value(self, index, value):
+
+        node : Node = self.__get_node_by_index(index=index)
+
+        node.value = value
  
 
 my_linked_list = LinkedList(4)
 
+print("Appending some items ...")
 my_linked_list.append(10)
 my_linked_list.append(8)
 my_linked_list.append(3)
+my_linked_list.append(2)
+
 
 print('Head:', my_linked_list.head.value)
 print('Tail:', my_linked_list.tail.value)
@@ -123,4 +161,11 @@ my_linked_list.print_values()
 
 print("Popping The First item ...")
 my_linked_list.pop_first()
+my_linked_list.print_values()
+
+print("getting only the item With Index = `2`")
+print(my_linked_list.get(2))
+
+print("`set_value` The item ...")
+my_linked_list.set_value(index=0, value=99)
 my_linked_list.print_values()
