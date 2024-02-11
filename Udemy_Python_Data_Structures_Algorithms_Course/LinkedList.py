@@ -145,11 +145,15 @@ class LinkedList:
 
         return node
     
-    def set_value(self, index, value):
+    def set_value(self, index, value) -> bool:
 
-        node : Node = self.__get_node_by_index(index=index)
+        node : Optional[Node] = self.__get_node_by_index(index=index)
+
+        if node is None:
+            return False
 
         node.value = value
+        return True
 
     def insert(self, index, value):
         
