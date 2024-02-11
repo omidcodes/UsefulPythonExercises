@@ -119,8 +119,17 @@ class LinkedList:
         if index < 0 or index > self.length - 1 :
             raise IndexError("Index is out of range")
 
-    def __get_node_by_index(self, index: int) -> Node:
-        self.__validate_index(index=index)
+    def __is_index_out_of_bound(self, index) -> bool:
+        if index < 0 or index > self.length - 1 :
+            return True
+        return False
+
+    def __get_node_by_index(self, index: int) -> Optional[Node]:
+
+        if self.__is_index_out_of_bound(index):
+            return None
+        
+        # self.__validate_index(index=index)
         
         current_one = self.head
 
@@ -129,12 +138,12 @@ class LinkedList:
 
         return current_one
 
-    def get(self, index):
+    def get(self, index) -> Optional[Node]:
         """ Indexes start from 0 """
 
-        node : Node = self.__get_node_by_index(index=index)
+        node : Optional[Node] = self.__get_node_by_index(index=index)
 
-        return node.value
+        return node
     
     def set_value(self, index, value):
 
