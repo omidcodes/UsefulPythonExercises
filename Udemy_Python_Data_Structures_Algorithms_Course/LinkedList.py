@@ -119,10 +119,17 @@ class LinkedList:
         if index < 0 or index > self.length - 1 :
             raise IndexError("Index is out of range")
 
-    def __is_index_out_of_bound(self, index) -> bool:
-        if index < 0 or index > self.length - 1 :
-            return True
-        return False
+    def __is_index_out_of_bound(
+        self,
+        index,
+        allow_index_equal_to_length:bool= False) -> bool:
+
+        if allow_index_equal_to_length is True:
+            is_out_of_bound = index < 0 or index > self.length
+        else:
+            is_out_of_bound = index < 0 or index > self.length -1 
+        
+        return bool(is_out_of_bound)
 
     def __get_node_by_index(self, index: int) -> Optional[Node]:
 
@@ -155,31 +162,31 @@ class LinkedList:
         node.value = value
         return True
 
-    def insert(self, index, value):
+    def insert(self, index, value) -> bool:
         
-        self.__validate_index(index=index)
+        # self.__validate_index(index=index)
 
+        if self.__is_index_out_of_bound(index, allow_index_equal_to_length=True):
+            return False
 
         if index == 0:
             self.prepend(value)
-            return
+            return True
 
         if index == self.length:
             self.append(value)
-            return
-
+            return True
         
         node_before : Node = self.__get_node_by_index(index=index-1)
         node_current : Node = node_before.next
 
-
         new_node = Node(value)
 
         node_before.next = new_node
-
         new_node.next = node_current
 
         self.length +=1
+        return True
 
     def remove(self, index):
         
