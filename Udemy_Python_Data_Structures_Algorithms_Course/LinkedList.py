@@ -115,10 +115,6 @@ class LinkedList:
         self.length -=1
         return return_node
 
-    def __validate_index(self, index) -> None:
-        if index < 0 or index > self.length - 1 :
-            raise IndexError("Index is out of range")
-
     def __is_index_out_of_bound(
         self,
         index,
@@ -131,30 +127,22 @@ class LinkedList:
         
         return bool(is_out_of_bound)
 
-    def __get_node_by_index(self, index: int) -> Optional[Node]:
-
-        if self.__is_index_out_of_bound(index):
-            return None
-        
-        # self.__validate_index(index=index)
-        
-        current_one = self.head
-
-        for _ in range(index):
-            current_one = current_one.next
-
-        return current_one
-
     def get(self, index) -> Optional[Node]:
         """ Indexes start from 0 """
 
-        node : Optional[Node] = self.__get_node_by_index(index=index)
+        if self.__is_index_out_of_bound(index):
+            return None
+                
+        current_node = self.head
 
-        return node
+        for _ in range(index):
+            current_node = current_node.next
+
+        return current_node
     
     def set_value(self, index, value) -> bool:
 
-        node : Optional[Node] = self.__get_node_by_index(index=index)
+        node : Optional[Node] = self.get(index=index)
 
         if node is None:
             return False
@@ -164,8 +152,6 @@ class LinkedList:
 
     def insert(self, index, value) -> bool:
         
-        # self.__validate_index(index=index)
-
         if self.__is_index_out_of_bound(index, allow_index_equal_to_length=True):
             return False
 
@@ -174,39 +160,35 @@ class LinkedList:
             return True
 
         if index == self.length:
-            self.append(value)
-            return True
-        
-        node_before : Node = self.__get_node_by_index(index=index-1)
-        node_current : Node = node_before.next
+            self.append(value)        # self.__validate_index(index=index)
 
-        new_node = Node(value)
-
-        node_before.next = new_node
-        new_node.next = node_current
-
-        self.length +=1
         return True
 
-    def remove(self, index):
+    def remove(self, index) -> Optional[Node]:
         
-        self.__validate_index(index)
+        if self.__is_index_out_of_bound(index):
+            return None
         
-        if self.length == 0 :   # TODO : Check. It may not be necessary
-            raise IndexError("Invalid Index")
+        if self.length == 0 :
+            return None
         
         if index == 0:
-            self.pop_first()
+            removed_node = self.pop_first()
 
         else:
-            before_node : Node = self.__get_node_by_index(index=index-1)
+            before_node : Node = self.get(index=index-1)
             current_node: Node = before_node.next
             after_node = current_node.next
 
             before_node.next = after_node
-            del current_node
 
-        self.length -=1
+            removed_node = current_node
+
+            # del current_node
+
+            self.length -=1
+
+        return removed_node
 
     def reverse_items(self):
         
