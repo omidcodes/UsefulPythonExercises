@@ -173,6 +173,25 @@ class LinkedList:
 
         self.length -=1
 
+    def reverse_items(self):
+        
+        if self.length == 0 or self.length == 1:
+            return
+
+        # Swap head and tail
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+
+
+        before = None
+        after = temp.next
+
+        for _ in range(self.length):
+            after = temp.next
+            temp.next = before
+            before = temp
+            temp = after
  
 
 my_linked_list = LinkedList(4)
@@ -218,4 +237,8 @@ my_linked_list.print_values()
 
 print("`Removing` The item ...")
 my_linked_list.remove(index=3)
+my_linked_list.print_values()
+
+print("`Reversing` The items ...")
+my_linked_list.reverse_items()
 my_linked_list.print_values()
