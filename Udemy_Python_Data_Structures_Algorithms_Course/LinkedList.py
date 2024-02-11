@@ -1,5 +1,6 @@
 from typing import Optional
 
+
 class Node:
     
     def __init__(self, value) -> None:
@@ -190,7 +191,8 @@ class LinkedList:
 
         return removed_node
 
-    def reverse_items(self):
+    def reverse(self):
+        """ Reverse items """
         
         if self.length == 0 or self.length == 1:
             return
@@ -257,5 +259,5 @@ my_linked_list.remove(index=3)
 my_linked_list.print_list()
 
 print("`Reversing` The items ...")
-my_linked_list.reverse_items()
+my_linked_list.reverse()
 my_linked_list.print_list()
