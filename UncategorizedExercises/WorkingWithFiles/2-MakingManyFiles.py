@@ -10,6 +10,7 @@ def make_many_files(path, n):
     print('Well Done!')
 
 # you can replace address with %appdata%
-make_many_files(r"H:\MAPSAExercises\mygitlab\PythonMapsa\pythonmapsa\ClassExercises\06-WorkingWithFiles\testfolder" , 20)
+path = r"/tmp/testfolder/"
+make_many_files(path , 20)
 
 # make_many_files("H:\\m", 4)
