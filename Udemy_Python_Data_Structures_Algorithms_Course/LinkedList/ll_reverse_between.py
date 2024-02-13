@@ -38,10 +38,20 @@ class LinkedList:
     #                                   #
     #####################################
 
-    def reverse_between(self, start_index: int , end_index: int):   # TODO:  COMPLETE ME ....
-        raise NotImplemented("COMPLTE ME .....")
+    def reverse_between(self, start_index: int , end_index: int):   # TODO:  COMPLETE ME .... ...abs
+
+        raise NotImplementedError("# TODO : COMPLETE ME ....")
+
+
+        # if self.length ==0 or self.length == 1 :
+        #     return
+
+        # node = self.head
+        # for _ in range(start_index - 1 ):
+        #     node = node.next
         
-    
+        # before_tail = node
+        
 
 
 linked_list = LinkedList(1)
