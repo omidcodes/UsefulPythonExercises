@@ -59,40 +59,139 @@ class DoublyLinkedList:
     def pop_first(self):
         if self.length == 0:
             return None
-
-        node = self.head
-
-        if self.length == 1 :
+        temp = self.head
+        if self.length == 1:
             self.head = None
             self.tail = None
         else:
-            self.head = node.next
+            self.head = self.head.next
             self.head.prev = None
+            temp.next = None      
+        self.length -= 1
+        return temp
 
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        temp = self.head
+        if index < self.length/2:
+            for _ in range(index):
+                temp = temp.next
+        else:
+            temp = self.tail
+            for _ in range(self.length - 1, index, -1):
+                temp = temp.prev  
+        return temp
+        
+    def set_value(self, index, value):
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return True
+        return False
+    
+    def insert(self, index, value):
+        if index < 0 or index > self.length:
+            return False
+        if index == 0:
+            return self.prepend(value)
+        if index == self.length:
+            return self.append(value)
+
+        new_node = Node(value)
+        before = self.get(index - 1)
+        after = before.next
+
+        new_node.prev = before
+        new_node.next = after
+        before.next = new_node
+        after.prev = new_node
+        
+        self.length += 1   
+        return True  
+
+    from typing import Optional
+    def remove(self, index:int) -> Optional[Node]:
+        
+        if index < 0 or index >= self.length:
+            return None
+
+        if index == 0:
+            return self.pop_first()
+
+        if index == self.length -1:
+            return self.pop()
+
+        node = self.get(index=index)
+
+        before = node.prev
+        after = node.next
+
+        before.next = after
+        after.prev = before
+
+        node.prev = None
+        node.next = None
         self.length-=1
+
         return node
 
+my_doubly_linked_list = DoublyLinkedList(1)
+my_doubly_linked_list.append(2)
+my_doubly_linked_list.append(3)
+my_doubly_linked_list.append(4)
+my_doubly_linked_list.append(5)
 
+print('DLL before remove():')
+my_doubly_linked_list.print_list()
 
+print('\nRemoved node:')
+print(my_doubly_linked_list.remove(2).value)
+print('DLL after remove() in middle:')
+my_doubly_linked_list.print_list()
 
-my_doubly_linked_list = DoublyLinkedList(2)
-my_doubly_linked_list.append(1)
+print('\nRemoved node:')
+print(my_doubly_linked_list.remove(0).value)
+print('DLL after remove() of first node:')
+my_doubly_linked_list.print_list()
 
-
-# (2) Items - Returns 2 Node
-print(my_doubly_linked_list.pop_first().value)
-# (1) Item -  Returns 1 Node
-print(my_doubly_linked_list.pop_first().value)
-# (0) Items - Returns None
-print(my_doubly_linked_list.pop_first())
+print('\nRemoved node:')
+print(my_doubly_linked_list.remove(2).value)
+print('DLL after remove() of last node:')
+my_doubly_linked_list.print_list()
 
 
 
 """
     EXPECTED OUTPUT:
     ----------------
-    2
+    DLL before remove():
     1
-    None
+    2
+    3
+    4
+    5
+
+    Removed node:
+    3
+    DLL after remove() in middle:
+    1
+    2
+    4
+    5
+
+    Removed node:
+    1
+    DLL after remove() of first node:
+    2
+    4
+    5
+
+    Removed node:
+    5
+    DLL after remove() of last node:
+    2
+    4
 
 """
+
