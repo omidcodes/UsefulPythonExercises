@@ -3,7 +3,7 @@ class Node:
         self.value = value
         self.next = None
         self.prev = None
-        
+
 
 class DoublyLinkedList:
     def __init__(self, value):
@@ -17,7 +17,7 @@ class DoublyLinkedList:
         while temp is not None:
             print(temp.value)
             temp = temp.next
-        
+
     def append(self, value):
         new_node = Node(value)
         if self.head is None:
@@ -29,39 +29,30 @@ class DoublyLinkedList:
             self.tail = new_node
         self.length += 1
         return True
-        
 
     def reverse(self):
 
-        # TODO : Implement Me .........
-        raise NotImplementedError("Implement me ...")
-        
-        # if self.length == 0 or self.length == 1:
-        #     return
+        if self.length == 0 or self.length == 1:
+            return
 
+        before = None
+        temp = self.head
 
-        # before = None
-        # temp = self.head
-        # after = temp.next
+        for i in range(self.length):
 
-        # for _ in range(self.length -1 ):
+            after = temp.next
 
-        #     temp.next = before
-        #     if before:
-        #         before.prev = temp
-            
-        #     before = temp
-        #     temp = after
+            temp.next = before
+            if before:
+                before.prev = temp
 
-        #     after = after.next
+            before = temp
+            temp = after
 
-
-        # temp = self.head
-        # self.head = self.tail
-        # self.tail = temp
-            
-
-
+        # Swaps head and tail
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
 
 
 my_doubly_linked_list = DoublyLinkedList(1)
@@ -70,18 +61,13 @@ my_doubly_linked_list.append(3)
 my_doubly_linked_list.append(4)
 my_doubly_linked_list.append(5)
 
-
 print('DLL before reverse():')
 my_doubly_linked_list.print_list()
 
-
 my_doubly_linked_list.reverse()
-
 
 print('\nDLL after reverse():')
 my_doubly_linked_list.print_list()
-
-
 
 """
     EXPECTED OUTPUT:
@@ -101,4 +87,3 @@ my_doubly_linked_list.print_list()
     1
 
 """
-
