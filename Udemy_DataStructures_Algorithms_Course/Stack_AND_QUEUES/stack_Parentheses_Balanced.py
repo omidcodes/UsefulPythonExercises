@@ -37,24 +37,8 @@ class Stack:
 ###############################################
 
 def is_balanced_parentheses(value) -> bool:
-    len_value: int = len(value)
-
-    if len_value == 0:
-        return True
-
-    if len_value % 2 != 0:
-        return False
-
-    for i in range(int(len_value / 2)):
-
-        first = value[i]
-        last = value[-i]
-
-        if first != last:
-            return False
-
-    return True
-
+    # TODO: Fixme
+    raise NotImplementedError("Implement me ")
 
 def test_is_balanced_parentheses():
     try:
@@ -122,6 +106,12 @@ def test_is_balanced_parentheses():
         print('Test case 11 passed')
     except AssertionError:
         print('Test case 11 failed')
+
+    try:
+        assert is_balanced_parentheses('(((((())))))') == True
+        print('Test case 13 passed')
+    except AssertionError:
+        print('Test case 13 failed')
 
 
 test_is_balanced_parentheses()
