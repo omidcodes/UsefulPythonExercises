@@ -21,6 +21,10 @@ class Solution(object):
         fast_ptr = head
 
         while True:
+
+            if fast_ptr is None:
+                return False
+
             slow_ptr = slow_ptr.next
             fast_ptr = fast_ptr.next
 
@@ -31,5 +35,4 @@ class Solution(object):
 
             if slow_ptr == fast_ptr:
                 return True
-        ptr_behind = head 
-        ptr_ahead = ptr_behind.next
+            
