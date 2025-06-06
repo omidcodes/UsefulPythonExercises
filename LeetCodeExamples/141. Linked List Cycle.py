@@ -13,20 +13,23 @@ class Solution(object):
 
         if head is None:
             return False
-
-        lst = [head]
-
-        ptr = head
+        
+        if head.next is None:
+            return False
+        
+        slow_ptr = head
+        fast_ptr = head
 
         while True:
+            slow_ptr = slow_ptr.next
+            fast_ptr = fast_ptr.next
 
-            ptr = ptr.next
-            if ptr is None:
-                # LinkedList has end (no loop)
+            if fast_ptr is None:
                 return False
             
-            lst.append(ptr)
-            if len(lst) != len(set(lst)):
-                # A node is seen two times -> loop
+            fast_ptr = fast_ptr.next
+
+            if slow_ptr == fast_ptr:
                 return True
-            
+        ptr_behind = head 
+        ptr_ahead = ptr_behind.next
