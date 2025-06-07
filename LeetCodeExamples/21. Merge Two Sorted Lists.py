@@ -23,34 +23,31 @@ class Solution:
 
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
 
-        pointer_list_1 = list1
-        pointer_list_2 = list2
+        ptr_list_1 = list1
+        ptr_list_2 = list2
 
         merged_list_head = ListNode(val=-101)
-        pointer_merged_list = merged_list_head
+        ptr_merged_list = merged_list_head
 
-        while pointer_list_1 or pointer_list_2:
+        while ptr_list_1 or ptr_list_2:
 
-            # merged_list_head.print_values()
-            # print("-----")
-
-            if pointer_list_1 is None and pointer_list_2:
-                pointer_merged_list.next = pointer_list_2
+            if ptr_list_1 is None and ptr_list_2:
+                ptr_merged_list.next = ptr_list_2
                 break
 
-            if pointer_list_2 is None and pointer_list_1:
-                pointer_merged_list.next = pointer_list_1
+            if ptr_list_2 is None and ptr_list_1:
+                ptr_merged_list.next = ptr_list_1
                 break
 
-            if pointer_list_1.val <= pointer_list_2.val:
-                pointer_merged_list.next = pointer_list_1
-                pointer_list_1 = pointer_list_1.next
+            if ptr_list_1.val <= ptr_list_2.val:
+                ptr_merged_list.next = ptr_list_1
+                ptr_list_1 = ptr_list_1.next
 
             else:
-                pointer_merged_list.next = pointer_list_2
-                pointer_list_2 = pointer_list_2.next
+                ptr_merged_list.next = ptr_list_2
+                ptr_list_2 = ptr_list_2.next
 
-            pointer_merged_list = pointer_merged_list.next
+            ptr_merged_list = ptr_merged_list.next
 
         merged_list_head = merged_list_head.next
         return merged_list_head
