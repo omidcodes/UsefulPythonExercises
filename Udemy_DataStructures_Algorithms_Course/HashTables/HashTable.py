@@ -58,7 +58,7 @@ my_hash_table.print_table()
 print("*" * 10)
 
 print(my_hash_table.get_item(key='Omid'))
-print(my_hash_table.get_item(key='WRONG Key')
+print(my_hash_table.get_item(key='WRONG Key'))
 
 print("*" * 10)
 
