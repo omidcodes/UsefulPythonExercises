@@ -15,25 +15,31 @@
 
 
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
+
+@dataclass()
+class Order:
+    _id: int
+    name: str
 
 # ---------------------- Payment -------------
 
 class Payment(ABC):
 
     @abstractmethod
-    def process(self):
+    def process(self, order:Order):
         pass
 
 class CardPayment(Payment):
 
-    def process(self):
-        print("Processing card")
+    def process(self, order:Order):
+        print(f"Processing order->'{order.name}' using card")
 
 class PaypalPayment(Payment):
 
-    def process(self):
-        print("Processing paypal")
+    def process(self, order:Order):
+        print(f"Processing order->'{order.name}' using paypal")
 
 # ---------------------- Storage -------------
 
@@ -59,25 +65,26 @@ class MessageNotifier(ABC):
     def send_confirmation(self, data):
         pass
 
-class Email(MessageNotifier):
+class EmailNotifier(MessageNotifier):
     def send_confirmation(self, data):
         print("sending Email")
 
-class SMS(MessageNotifier):
+class SMSNotifier(MessageNotifier):
     def send_confirmation(self, data):
         print("sending SMS")
 
 class OrderService:
-    def __init__(self, order, storage: Storage, message_notifier: MessageNotifier, payment: Payment):
+    def __init__(self, storage: Storage, message_notifier: MessageNotifier, payment: Payment):
         self.storage = storage
         self.message_notifier = message_notifier
-        self.__payment = payment
-        self.order = order
+        self.payment = payment
 
-    def process_order(self):
-        self.__payment.process()
+    def process_order(self, order: Order):
+        self.payment.process(order=order)
 
-        self.storage.save(self.order)
-        self.message_notifier.send_confirmation(self.order)
+        self.storage.save(order)
+        self.message_notifier.send_confirmation(order)
 
-OrderService(order="myorder01" , storage=MySQL() , message_notifier=Email(), payment=PaypalPayment())
+order_service = OrderService(storage=MySQL() , message_notifier=SMSNotifier(), payment=PaypalPayment())
+order = Order(_id= 10, name="myorder01")
+order_service.process_order(order)
